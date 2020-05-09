@@ -88,13 +88,13 @@ namespace Calculator
             {
                 double number = Convert.ToDouble(Display.Text);   // converts the display text to numbers then makes it negative/positive and converts them back to strings 
                 number *= -1;
-                Display.Text = Convert.ToString(number);
+                Display.Text = number.ToString("F99").TrimEnd('0');
             }
             catch
             {
 
             }
-            // try and catch is: if this works (try) ok, if it doesnt (catch) do nothing 
+            // try and catch is: if code that u try crashes then go to catch
         }
     }
 }

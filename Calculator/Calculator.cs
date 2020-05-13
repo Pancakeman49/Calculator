@@ -9,12 +9,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using System.Threading;
+using System.Drawing.Printing;
 
 namespace Calculator
 {
     public partial class Calculator : Form
     {
         char decsep;
+        double numOne = 0;
+        double numTwo = 0;
+        string operation = null;
         public Calculator()
         {
             InitializeComponent();
@@ -88,7 +92,7 @@ namespace Calculator
             {
                 double number = Convert.ToDouble(Display.Text);   // converts the display text to numbers then makes it negative/positive and converts them back to strings 
                 number *= -1;
-                Display.Text = number.ToString("F99").TrimEnd('0');
+                Display.Text = number.ToString();
             }
             catch
             {
@@ -96,5 +100,36 @@ namespace Calculator
             }
             // try and catch is: if code that u try crashes then go to catch
         }
+
+        private void Operation_click(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            operation = button.Text;
+            numOne = Convert.ToDouble(Display.Text);
+            Display.Text = string.Empty;
+        }
+        private void buttonEquals_Click(object sender, EventArgs e)
+        {
+            double resault = 0;
+            numTwo = Convert.ToDouble(Display.Text);
+            if (operation == "+")
+            {
+                resault = numOne + numTwo;
+            }
+            else if (operation == "-")
+            {
+                resault = numOne - numTwo;
+            }
+            else if (operation == "X")
+            {
+                resault = numOne * numTwo;
+            }
+            else if (operation == "/")
+            {
+                resault = numOne / numTwo;
+            }
+            Display.Text = resault.ToString();
+        }
+
     }
 }
